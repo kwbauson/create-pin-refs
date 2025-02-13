@@ -1,5 +1,5 @@
 {
-  outputs = _:
+  outputs = { self }:
     let
       # see https://github.com/NixOS/nixpkgs/blob/master/lib/attrsets.nix
       genAttrs = names: f: builtins.listToAttrs (map (n: { name = n; value = f n; }) names);
@@ -30,5 +30,8 @@
     in
     {
       packages = genAttrs systems.flakeExposed (system: import ./default.nix { inherit system storePath; });
+      apps = genAttrs systems.flakeExposed (system:
+        builtins.mapAttrs (name: path: { type = "app"; program = path + "/bin/${name}"; }) self.packages.${system}
+      );
     };
 }
