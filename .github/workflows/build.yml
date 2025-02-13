@@ -21,4 +21,4 @@ jobs:
       - run: |
           nix build .#test-linux
           cachix push create-pin-refs ./result
-          cachix pin create-pin-refs test-linux ./result
+          cachix pin create-pin-refs test-linux ./result --keep-revisions 1
