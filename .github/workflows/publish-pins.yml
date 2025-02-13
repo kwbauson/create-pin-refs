@@ -1,4 +1,4 @@
-name: pins
+name: Publish pins to github-pages
 on:
   workflow_run:
     workflows: ['Build']
