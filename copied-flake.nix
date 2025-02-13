@@ -23,6 +23,7 @@
             {
               fromStore = import ./store.nix;
               fromPath = path;
+              inputAddressed = true;
             }
         else
           builtins.storePath path;
