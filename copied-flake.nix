@@ -1,7 +1,9 @@
 {
   outputs = _:
     let
+      # see https://github.com/NixOS/nixpkgs/blob/master/lib/attrsets.nix
       genAttrs = names: f: builtins.listToAttrs (map (n: { name = n; value = f n; }) names);
+      # see https://github.com/NixOS/nixpkgs/blob/master/lib/systems/flake-systems.nix
       systems.flakeExposed = [
         "x86_64-linux"
         "aarch64-linux"
