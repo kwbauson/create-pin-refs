@@ -13,7 +13,7 @@ The [publish-pins](.github/workflows/publish-pins.yml) workflow makes those pins
 As long as you have your machine configured to use your cachix and the `publish-pins` workflow has comleted, you can build/run pins that only pull from the cache and skip evaluation:
 
 ```bash
-nix build -f nix-build https://kwbauson.github.io/create-pin-refs/pins test
+nix build -f https://kwbauson.github.io/create-pin-refs/pins test
 # or
 nix shell -f https://kwbauson.github.io/create-pin-refs/pins test -c test
 ```
