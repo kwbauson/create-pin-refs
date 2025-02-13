@@ -14,11 +14,8 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: |
           nix build .#create-pin-refs
-          cachix push create-pin-refs ./result
       - run: |
           nix build .#test
-          cachix push create-pin-refs ./result
       - run: |
           nix build .#test-linux
-          cachix push create-pin-refs ./result
           cachix pin create-pin-refs test-linux ./result
