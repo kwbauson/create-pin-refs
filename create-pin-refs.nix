@@ -30,5 +30,5 @@ writers.writeBashBin "create-pin-refs" ''
   cp --no-preserve=mode ${./copied-default.nix} default.nix
   cd ..
   tar czf pins.tar.gz pins
-  mv pins.tar.gz pins
+  mv pins.tar.gz pins/pins
 ''
