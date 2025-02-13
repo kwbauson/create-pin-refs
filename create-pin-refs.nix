@@ -16,8 +16,8 @@ writers.writeBashBin "create-pin-refs" ''
   fi
   cache=$1
 
-  mkdir -p pins-dir
-  cd pins-dir
+  mkdir -p pins
+  cd pins
   echo "\"https://$cache.cachix.org\"" > store.nix
   (
     echo "{ storePath }:"
@@ -29,5 +29,6 @@ writers.writeBashBin "create-pin-refs" ''
   cp --no-preserve=mode ${./copied-flake.nix} flake.nix
   cp --no-preserve=mode ${./copied-default.nix} default.nix
   cd ..
-  tar czf pins pins-dir
+  tar czf pins.tar.gz pins
+  mv pins.tar.gz pins
 ''

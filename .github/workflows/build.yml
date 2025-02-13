@@ -11,11 +11,6 @@ jobs:
             system: x86_64-linux
           - os: macos-latest
             system: aarch64-darwin
-        package:
-          - default
-          - create-pin-refs
-          - test
-          # - test-linux
     runs-on: ${{ matrix.build.os }}
     steps:
       - uses: actions/checkout@v4
@@ -25,6 +20,14 @@ jobs:
           name: create-pin-refs
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - run: |
-          nix build .#${{ matrix.package }}
-          cachix push create-pin-refs ./result
-          cachix pin create-pin-refs ${{ matrix.package }}.${{ matrix.system }} ./result --keep-revisions 1
+          packages=(
+            default
+            create-pin-refs
+            test
+            # test-linux
+          )
+          for pkg in "${packages[@]}";do
+            nix build .#"$pkg"
+            cachix push create-pin-refs ./result
+            cachix pin create-pin-refs "$pkg".${{ matrix.build.system }} ./result --keep-revisions 1
+          done
