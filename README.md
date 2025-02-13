@@ -52,4 +52,7 @@ All that's needed is the ability to serve tarballs and map names to cached store
 
 - Don't require overwriting github pages for the repo.
 - The current workflow publishes updates to github-pages via actions, which usually takes about a minute. Publishing via pushing to a branch could be faster as well as complete within build workflows.
+  - Storing pin refs in a branch would also allow `nix run github:kwbauson/create-pin-refs/pins#test` instead of using an explict url
 - Investigate pulling derivation paths from cachix narinfo files. This may allow creating fake derivations that are more like what the `nix` cli expects, instead of only store paths/flake apps.
+  - This requires pushing derivations to cachix which isn't as good, maybe a simple `derivation` call that links to the pin?
+- More cli args, e.g. to wrap `cachix` calls and generate more metadata
